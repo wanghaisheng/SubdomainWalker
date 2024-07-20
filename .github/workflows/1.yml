@@ -17,7 +17,10 @@ jobs:
 
       - name: Change to Subwalker directory
         run: |
-         chmod +x ./subwalker.sh
+         chmod +x ./subwalker.sh ./install.sh
+         sudo ./install.sh
+
+        
          ./subwalker.sh  "${{ github.event.inputs.url }}"
           echo "Output saved to: /opt/subwalker/subwalker.txt"
       - name: Release
