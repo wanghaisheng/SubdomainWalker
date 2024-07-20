@@ -1,0 +1,31 @@
+name: Install and Run Subwalker
+
+on:
+  workflow_dispatch:
+    inputs:
+      url:
+        description: domain 
+        type: enviroment
+        required: true
+
+jobs:
+  run-subwalker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Change to Subwalker directory
+        run: |
+         chmod +x ./subwalker.sh
+         ./subwalker.sh  "${{ github.event.inputs.url }}"
+          echo "Output saved to: /opt/subwalker/subwalker.txt"
+      - name: Release
+        uses: marvinpinto/action-automatic-releases@latest
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: "${{ github.run_id }}"
+          prerelease: false
+          title: "${{ github.run_id }}"
+          files: |
+           /opt/subwalker/*
