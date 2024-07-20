@@ -31,4 +31,4 @@ jobs:
           prerelease: false
           title: "${{ github.run_id }}"
           files: |
-           /opt/subwalker/*
+            /home/runner/work/SubdomainWalker/SubdomainWalker/subwalker.txt
